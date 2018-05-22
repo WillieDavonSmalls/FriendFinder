@@ -12,8 +12,7 @@ var PORT = process.env.PORT || 3000;
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
-var EnteredData = 
-
+var friendsData = 
 [
     {
     "name": "Ahmed",
@@ -66,4 +65,26 @@ var EnteredData =
     "photo": "https://as.ftcdn.net/r/v1/pics/ea2e0032c156b2d3b52fa9a05fe30dedcb0c47e3/landing/images_photos.jpg",
     "scores": ["3","4","2","3","3","3","3","2","3","4"]
     }
-    ]
+]
+
+
+// Create New Characters - takes in JSON input
+app.post("/api/friends", function(req, res) {
+    // req.body hosts is equal to the JSON post sent from the user
+    // This works because of our body-parser middleware
+    var newcharacter = req.body;
+  
+    console.log(newcharacter);
+  
+    // We then add the json the user sent to the character array
+    characters.push(newcharacter);
+  
+    // We then display the JSON to the users
+    res.json(newcharacter);
+  });
+
+  // Basic route that sends the user first to the AJAX Page
+app.get("/", function(req, res) {
+    // res.send("Welcome to the Star Wars Page!")
+    res.sendFile(path.join(__dirname, "survey.html"));
+  });
